@@ -110,22 +110,22 @@ class Favorites {
     this.comics.push(comic);
   }
 
-  removeFavorite(comicId){
+  removeFavorite(comicId) {
     this.comics = this.comics.filter(comicsItem => comicsItem.id !== comicId);
   }
 
-  showFavorites(){
+  showFavorites() {
     return this.comics;
   }
 
-  addMultipleFavorites(...comics){
+  addMultipleFavorites(...comics) {
     for (let i = 0; i < comics.length; i++) {
       if (this.comics.some(comicsItem => comicsItem.id === comics[i].id)) return;
       this.comics.push(comics[i]);
     }
   }
 
-  copyFavorites(){
+  copyFavorites() {
     //const thisComicsString = JSON.stringify(this.comics)
     //const copyOfThisComics = JSON.parse(thisComicsString)
 
@@ -174,5 +174,13 @@ function findComicById(comics, targetId) {
 
 console.log("-----------");
 console.log("findComicById");
-const foundComic = findComicById(favorites.showFavorites(), 5);
-console.log(foundComic);
+console.log(findComicById(favorites.showFavorites(), 5));
+
+function calculateAveragePrice(comics) {
+  if (comics.length === 0) return 0;
+ return comics.reduce((total, comic) => total + comic.price, 0) / comics.length;
+}
+
+console.log("-----------");
+console.log("calculateAveragePrice");
+console.log(calculateAveragePrice(favorites.showFavorites()).toFixed(2));
